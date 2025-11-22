@@ -1,0 +1,11 @@
+63f7b34db8d8cdea90c76aacccf841ec
+::res://::1763822924
+BasicButton.gd::GDScript::5264398256260141255::1763813139::0::1::::<>Node<><>0<>0<><>::
+ButtonController.gd::GDScript::8281665805164759334::1763813365::0::1::::BasicButton<>Button<><>0<>0<><>::
+calculator.gd::GDScript::6528489167280526323::1763821014::0::1::::<>Control<><>0<>0<><>::
+calculator.tscn::PackedScene::7231906844371206685::1763822932::0::1::::<><><>0<>0<><>::uid://c0api60s4fwit::::res://calculator.gd<>uid://606uy3qcawrl::::res://DisplayContainer.gd<>uid://58jmg6xqcypb::::res://prstartk.ttf<>uid://ect8hktyi0nv::::res://Display2D.gd<>uid://dp8x3cw82exvq::::res://ButtonController.gd<>uid://c4fgrehdrd31i::::res://node_2d.gd
+Display2D.gd::GDScript::286097068128857555::1763822470::0::1::::<>Node2D<><>0<>0<><>::
+DisplayContainer.gd::GDScript::2229382843828949189::1763822669::0::1::::<>Container<><>0<>0<><>::
+icon.svg::CompressedTexture2D::3933441479278969812::1763811973::1763812173::1::::<><><>0<>0<>30662f98f0c33ea9c8793786170cd2a8<>res://.godot/imported/icon.svg-218a8f2b3041327d8a5756f3a245f83b.ctex::
+node_2d.gd::GDScript::6819034603178628788::1763821684::0::1::::<>Node2D<><>0<>0<><>::
+prstartk.ttf::FontFile::2174358021582241807::1763820631::1763820631::1::::<><><>0<>0<>c03984eabedacbac82673bdfc9654b00<>res://.godot/imported/prstartk.ttf-c76b24c746dc565326b2cc637901d0c3.fontdata::
