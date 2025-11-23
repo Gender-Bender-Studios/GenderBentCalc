@@ -5,9 +5,12 @@ extends Container
 @onready var PointsLabel = $PointsLabel
 @onready var targetBar = $progressBar
 @onready var display = $"../DisplayContainer/Display2D/Display"
+@onready var BossContainer = $"../BossFrame"
 
 var currentValue: float = randi_range(-100,100)
-var target:float = randi_range(-100,100)
+var area: int = 1
+var currenemy: String = ""
+var target:float = _targetGen()
 
 
 
@@ -81,7 +84,31 @@ func mirror(arr:Array) -> Array:
 		temp.append(-arr[i])
 	temp = temp + arr
 	return temp
+
+func _targetGen():
+	if currenemy == "Denise":
+		# Target type: Big numbers
+		return randi() % (10^(area+3)+1-10^(area+2)) + 10^(area+2)
+	else:
+		if area == 1:
+			# Target type: Square numbers
+			return (randi() % 12 + 4)**2
+		elif area == 2:
+			# Target type: Fib numbers
+			var x: int = randi() % 17 + 4
+			return F(x)
+		elif area == 3:
+			# Target type: Small numbers
+			return 1/(randi() % 90001 + 10000)
+		else:
+			# Target type: Constants
+			if randi() % 1 == 1:
+				return (randi() % 99 + 1)*2.71828
+			else:
+				return (randi() % 99 + 1)*3.14159
 	
-	
-	
-	
+func F(a):
+	if a == 1 or a == 2:
+		return 1
+	else:
+		return F(a-1) + F(a-2)

@@ -1,9 +1,12 @@
 Label
-Node2D
 Sprite2D
+Button
+Control
+Node2D
+ColorRect
 Panel
 Container
-ColorRect
+ProgressBar
+TextureProgressBar
 AnimatedSprite2D
 TextEdit
-Control

@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://dbbgpjgxh7438"]
+[gd_scene load_steps=22 format=3 uid="uid://dbbgpjgxh7438"]
 
 [ext_resource type="Script" uid="uid://c0api60s4fwit" path="res://calculator.gd" id="1_kvxsv"]
 [ext_resource type="Script" uid="uid://606uy3qcawrl" path="res://DisplayContainer.gd" id="2_2r0k0"]
@@ -8,11 +8,19 @@
 [ext_resource type="Script" uid="uid://dp8x3cw82exvq" path="res://ButtonController.gd" id="3_wfhry"]
 [ext_resource type="Texture2D" uid="uid://dngmop7d3fixa" path="res://Assets/Battery_life.png" id="4_n8v26"]
 [ext_resource type="Script" uid="uid://c4fgrehdrd31i" path="res://ButtonUses.gd" id="4_quc1l"]
+[ext_resource type="Script" uid="uid://buey07oj73ot2" path="res://score_container.gd" id="5_i2ixg"]
 [ext_resource type="Theme" uid="uid://dhrqi05xwfxmy" path="res://Textures/white buttons.tres" id="5_n86kn"]
 [ext_resource type="Script" uid="uid://wxfksv0x5ams" path="res://progress_container.gd" id="7_8s7sf"]
 [ext_resource type="Script" uid="uid://d4kv6t2hc201d" path="res://progressRenderer.gd" id="8_bht02"]
 [ext_resource type="Texture2D" uid="uid://bl4thh2bhpaad" path="res://Assets/Blank_calc_main.png" id="10_5fm7i"]
 [ext_resource type="Script" uid="uid://dl3whmfcw7i54" path="res://prices.gd" id="11_n8v26"]
+[ext_resource type="Script" uid="uid://d2dsed55ddsgq" path="res://boss_container.gd" id="14_wqfqp"]
+[ext_resource type="Texture2D" uid="uid://dexayin0orj1a" path="res://Assets/Placeholders/IMG_3336.jpg" id="15_2ur1s"]
+[ext_resource type="Texture2D" uid="uid://dyn7wk6o5315r" path="res://Assets/Button_description_page.png" id="16_xbgcs"]
+[ext_resource type="Theme" uid="uid://cx8wsmug2nj0s" path="res://Textures/blue buttons.tres" id="17_xbgcs"]
+[ext_resource type="Texture2D" uid="uid://cxr4yn1dwp2x" path="res://Assets/New_button_icon.png" id="18_4lgyd"]
+[ext_resource type="Script" uid="uid://pf28ut1simgj" path="res://node_2d.gd" id="19_4lgyd"]
+[ext_resource type="Theme" uid="uid://ce5dcjl6hekcq" path="res://Textures/orange buttons.tres" id="21_r0ob0"]
 
 [node name="Calculator" type="Control"]
 layout_mode = 3
@@ -28,6 +36,50 @@ z_index = -1
 position = Vector2(398.00003, 564)
 scale = Vector2(0.56437504, 0.5599999)
 texture = ExtResource("10_5fm7i")
+
+[node name="ProgressContainer" type="Container" parent="."]
+layout_mode = 0
+offset_left = 25.0
+offset_top = 25.0
+offset_right = 775.0
+offset_bottom = 175.0
+script = ExtResource("7_8s7sf")
+
+[node name="targetLabel" type="Label" parent="ProgressContainer"]
+layout_mode = 2
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="progressBar" type="Node2D" parent="ProgressContainer"]
+script = ExtResource("8_bht02")
+
+[node name="ScoreContainer" type="Control" parent="."]
+anchors_preset = 0
+offset_left = 29.0
+offset_top = 254.0
+offset_right = 476.0
+offset_bottom = 317.0
+script = ExtResource("5_i2ixg")
+
+[node name="Preface" type="Label" parent="ScoreContainer"]
+layout_mode = 0
+offset_left = 31.0
+offset_top = 40.0
+offset_right = 152.0
+offset_bottom = 63.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "Current points: "
+
+[node name="Node2D" type="Node2D" parent="ScoreContainer"]
+position = Vector2(52, 288)
+
+[node name="ScoreLabel" type="Label" parent="ScoreContainer/Node2D"]
+offset_left = 101.0
+offset_top = -248.0
+offset_right = 403.0
+offset_bottom = -225.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "50"
 
 [node name="LifePanel" type="Panel" parent="."]
 layout_mode = 0
@@ -112,6 +164,7 @@ script = ExtResource("11_n8v26")
 [node name="Label" type="Label" parent="BasicPanel/ButtonTemplate/Prices"]
 offset_right = 40.0
 offset_bottom = 23.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
 
 [node name="MenuPanel" type="GridContainer" parent="."]
 layout_mode = 0
@@ -141,20 +194,163 @@ offset_bottom = 875.0
 theme_override_constants/h_separation = 25
 theme_override_constants/v_separation = 25
 
-[node name="ProgressContainer" type="Container" parent="."]
+[node name="BossFrame" type="ColorRect" parent="."]
 layout_mode = 0
-offset_left = 25.0
-offset_top = 25.0
-offset_right = 775.0
-offset_bottom = 175.0
-script = ExtResource("7_8s7sf")
+offset_left = 814.0
+offset_top = 22.0
+offset_right = 986.0
+offset_bottom = 207.0
+script = ExtResource("14_wqfqp")
 
-[node name="targetLabel" type="Label" parent="ProgressContainer"]
-layout_mode = 2
+[node name="BossSprite" type="Sprite2D" parent="BossFrame"]
+position = Vector2(86.00006, 103)
+scale = Vector2(0.05, 0.036)
+texture = ExtResource("15_2ur1s")
+
+[node name="BossHP" type="Node2D" parent="BossFrame"]
+position = Vector2(17, 157)
+scale = Vector2(0.9, 0.9)
+
+[node name="BossHPBar" type="ProgressBar" parent="BossFrame/BossHP"]
+self_modulate = Color(0.88235295, 0.2509804, 0.4117647, 1)
+custom_minimum_size = Vector2(150, 20)
+offset_left = 2.2222223
+offset_top = -1.1111112
+offset_right = 152.22223
+offset_bottom = 25.88889
+value = 50.0
+show_percentage = false
+metadata/_edit_use_anchors_ = true
+
+[node name="BossName" type="Node2D" parent="BossFrame"]
+position = Vector2(10, 5)
+
+[node name="BossLabel" type="Label" parent="BossFrame/BossName"]
+custom_minimum_size = Vector2(152, 0)
+offset_right = 40.0
+offset_bottom = 23.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
 horizontal_alignment = 1
 vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
 
-[node name="progressBar" type="Node2D" parent="ProgressContainer"]
-script = ExtResource("8_bht02")
+[node name="BossDescription" type="Sprite2D" parent="BossFrame"]
+position = Vector2(91.000015, 470.5)
+scale = Vector2(0.23913045, 0.31955212)
+texture = ExtResource("16_xbgcs")
+
+[node name="DescLabel" type="Label" parent="BossFrame/BossDescription"]
+offset_left = -227.69995
+offset_top = -423.28125
+offset_right = 227.69995
+offset_bottom = 396.67493
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 48
+text = "Pressure: Buttons take 2 uses per press, not one"
+autowrap_mode = 2
+
+[node name="ButtonSwapPanel" type="Panel" parent="."]
+visible = false
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="POWTemplate" type="Sprite2D" parent="ButtonSwapPanel"]
+position = Vector2(-427.5, -4.25)
+scale = Vector2(0.75966185, 0.86003447)
+texture = ExtResource("16_xbgcs")
+
+[node name="Button" type="Button" parent="ButtonSwapPanel/POWTemplate"]
+offset_left = -154.6741
+offset_top = 184.00424
+offset_right = 133.61203
+offset_bottom = 364.22955
+theme = ExtResource("17_xbgcs")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_pressed_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 32
+text = "Display Name"
+
+[node name="Sprite2D" type="Sprite2D" parent="ButtonSwapPanel/POWTemplate/Button"]
+position = Vector2(279.07153, -5.81369)
+scale = Vector2(1, 0.99999994)
+texture = ExtResource("18_4lgyd")
+
+[node name="Node2D" type="Node2D" parent="ButtonSwapPanel/POWTemplate"]
+position = Vector2(-261.30048, -446.20303)
+script = ExtResource("19_4lgyd")
+
+[node name="Label" type="Label" parent="ButtonSwapPanel/POWTemplate/Node2D"]
+offset_left = 1.2373924
+offset_top = 11.848362
+offset_right = 223.2374
+offset_bottom = 112.84836
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 32
+text = "Button Title
+Triggerable / Passive
+Uses
+Effect"
+
+[node name="REGTemplate" type="Sprite2D" parent="ButtonSwapPanel"]
+position = Vector2(231, 1.999999)
+scale = Vector2(0.75966185, 0.86003447)
+texture = ExtResource("16_xbgcs")
+
+[node name="Button2" type="Button" parent="ButtonSwapPanel/REGTemplate"]
+offset_left = -154.67409
+offset_top = 184.00423
+offset_right = 133.61205
+offset_bottom = 364.22955
+theme = ExtResource("5_n86kn")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_pressed_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 32
+text = "Display Name"
+
+[node name="Sprite2D" type="Sprite2D" parent="ButtonSwapPanel/REGTemplate/Button2"]
+position = Vector2(290.26074, -2.6161566)
+texture = ExtResource("18_4lgyd")
+
+[node name="Node2D" type="Node2D" parent="ButtonSwapPanel/REGTemplate"]
+position = Vector2(-261.30048, -446.20303)
+
+[node name="Label" type="Label" parent="ButtonSwapPanel/REGTemplate/Node2D"]
+offset_left = 1.2373924
+offset_top = 11.848362
+offset_right = 223.2374
+offset_bottom = 112.84836
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 32
+text = "Button Title
+Triggerable / Passive
+Uses
+Effect"
+
+[node name="ButtonTrader" type="Control" parent="."]
+anchors_preset = 0
+offset_left = 815.0
+offset_top = 719.0
+offset_right = 979.0
+offset_bottom = 837.0
+
+[node name="ButtonTraderButton" type="Button" parent="ButtonTrader"]
+layout_mode = 0
+offset_right = 164.0
+offset_bottom = 130.0
+theme = ExtResource("21_r0ob0")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_pressed_color = Color(0, 0, 0, 1)
+text = "Trade for a new button?"
+autowrap_mode = 2
 
 [connection signal="button_down" from="BasicPanel/ButtonTemplate" to="BasicPanel/ButtonTemplate" method="_on_button_down"]

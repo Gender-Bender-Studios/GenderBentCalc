@@ -7,7 +7,7 @@ func _draw() -> void:
 	var size: int = template.size.x
 	var radius: int = 15
 	var txtsz: float = 0.8
-	var ind: Vector2 = Vector2(-3, 3)
+	var ind: Vector2 = Vector2(-8, 8)
 	
 
 	draw_circle(Vector2(size, 0) + ind, radius, Color.DIM_GRAY)

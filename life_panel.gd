@@ -36,7 +36,7 @@ func _process(delta: float) -> void:
 				break
 		
 	if numlives <= 0:
-		# Die
+		_die()
 		pass
 
 func _spawnlives(startlives,lives) -> void:
@@ -46,3 +46,6 @@ func _spawnlives(startlives,lives) -> void:
 		clone.name = "life_" + str(n)
 		LifePanel.add_child(clone)
 		clone.position = Vector2(18 + n*spacing,25)
+
+func _die():
+	pass

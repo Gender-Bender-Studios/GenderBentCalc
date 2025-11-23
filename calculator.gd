@@ -10,9 +10,14 @@ var basic_button_data : Array = []
 var menu_button_data : Array = []
 var control_button_data : Array = []
 var power_button_data : Array = []
-var TotalPoints = 100
-var count = 10
+var TotalPoints: int = 10
+var count: int = 10
 var inShop: bool = false
+
+# Button swapping variables
+var buttSwap: bool = false
+var buttToSwap: String = "" # The text that will go on the button
+var buttType: String = "" # REG / POW 
 
 @onready var whitebutton = load("res://Textures/white buttons.tres")
 @onready var orangebutton = load("res://Textures/orange buttons.tres")
@@ -31,12 +36,9 @@ var inShop: bool = false
 @onready var lbl = $BasicPanel/ButtonTemplate/Uses/Label
 @onready var USES = $BasicPanel/ButtonTemplate/Uses
 @onready var lblprices = $BasicPanel/ButtonTemplate/Prices/Label
-# DANGERA
-
 
 func _ready() -> void:
 	_create_buttons(BasicButtons, BasicPanel, basic_button_data, whitebutton)
-
 	_create_buttons(MenuButtons, MenuPanel, menu_button_data, orangebutton, -2)
 	_create_buttons(PowerButtons, PowerPanel, power_button_data, bluebutton)
 	_create_buttons(ControlButtons, ControlPanel, control_button_data, orangebutton, -2)
