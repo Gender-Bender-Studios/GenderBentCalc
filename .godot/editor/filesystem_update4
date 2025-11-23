@@ -1,0 +1,14 @@
+res://calculator.tscn
+res://Textures/white buttons.tres
+res://Textures/blue buttons.tres
+res://calculator.gd
+res://Display2D.gd
+res://life_panel.gd
+res://ButtonController.gd
+res://ButtonUses.gd
+res://progress_container.gd
+res://prices.gd
+res://boss_container.gd
+res://Textures/buttonSwapButtons.tres
+res://score_container.gd
+res://Textures/orange buttons.tres
