@@ -7,14 +7,14 @@ extends Container
 @onready var display = $"../DisplayContainer/Display2D/Display"
 @onready var BossContainer = $"../BossFrame"
 
-var currentValue: float = randi_range(-100,100)
+var currentValue: float = 0
 var area: int = 1
 var currenemy: String = ""
 var target:float = _targetGen()
 
 
 
-var relativeValues = [0.01,0.3,0.75]
+var relativeValues = [0.3,0.75]
 var relativePositions = generateFucksGiven(relativeValues,750)
 
 const barHeight:int = 50
@@ -57,9 +57,12 @@ func _ready() -> void:
 		
 		
 	targetBar.queue_redraw()
+
+func _FixLabelValues():
+	pass
 	
 func CheckScore(current:float,target:float) -> void:
-	var relativeScore:float = 1- current/target
+	var relativeScore:float = (current/target) - 1
 	
 	if abs(relativeScore) <= 0.1:
 		pass
@@ -99,7 +102,7 @@ func _targetGen():
 			return F(x)
 		elif area == 3:
 			# Target type: Small numbers
-			return 1/(randi() % 90001 + 10000)
+			return float(1)/(randi() % 90001 + 10000)
 		else:
 			# Target type: Constants
 			if randi() % 1 == 1:

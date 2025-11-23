@@ -16,7 +16,7 @@ func _process(delta: float) -> void:
 	if currenemy == "NB":
 		if room == 6:
 			_spawnAreaBoss()
-			currenemy = areabosses[area]
+			currenemy = areabosses[area-1]
 			BossBar.max_value = 100 + 40*area
 		elif area == 1 and room == 1:
 			_spawnDenise()
@@ -28,11 +28,13 @@ func _process(delta: float) -> void:
 	if BossBar.value <= 0:
 		if BossName.text == "Tsundere Denise":
 			_victoryscreen()
+		elif currenemy == "NB":
+			pass
 		else:
 			_killBoss()
 
 func _spawnAreaBoss():
-	currenemy = areabosses[area]
+	currenemy = areabosses[area-1]
 	BossBar.max_value = 100 + 40*area
 	BossBar.value = 100 + 40*area
 	
@@ -68,15 +70,20 @@ func _spawnGenBoss():
 		BossDesc.text = "Pressure: Buttons take 2 uses per press, not one /n Presence: She jumps in front of some of your buttons each round to make sure you're paying attention to her"
 
 func _killBoss():
+	print("we did it")
 	BossBar.value = 0
+	
 	
 	BossContainer.visible = false
 	
-	area += 1
-	room = 1
+	if room == 6:
+		area += 1
+		room = 1
+	else:
+		room += 1
 	
 	currenemy = "NB"
-	BossDesc.Text = ""
+	BossDesc.text = ""
 
 func _victoryscreen():
 	pass

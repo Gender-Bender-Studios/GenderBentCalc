@@ -10,8 +10,7 @@ var basic_button_data : Array = []
 var menu_button_data : Array = []
 var control_button_data : Array = []
 var power_button_data : Array = []
-var TotalPoints: int = 10
-var count: int = 10
+var TotalPoints: int = 0
 var inShop: bool = false
 
 # Button swapping variables
@@ -31,7 +30,9 @@ var buttType: String = "" # REG / POW
 @onready var PowerPanel = $PowerPanel
 @onready var ControlPanel = $ControlPanel
 @onready var DisplayLabel = $DisplayContainer/Display2D/Display
-
+@onready var BossFrame = $BossFrame
+@onready var ProgressContainer = $ProgressContainer
+@onready var ScoreLogic = $"ScoreLogic(idk_how_to_reference_scripts)"
 # DANGERA
 @onready var lbl = $BasicPanel/ButtonTemplate/Uses/Label
 @onready var USES = $BasicPanel/ButtonTemplate/Uses
@@ -42,6 +43,7 @@ func _ready() -> void:
 	_create_buttons(MenuButtons, MenuPanel, menu_button_data, orangebutton, -2)
 	_create_buttons(PowerButtons, PowerPanel, power_button_data, bluebutton)
 	_create_buttons(ControlButtons, ControlPanel, control_button_data, orangebutton, -2)
+	print("Starting Stats: "+str(ProgressContainer.target)+"  "+str(ProgressContainer.currentValue)+"  "+str(BossFrame.room)+"  "+str(BossFrame.area))
 
 
 func _create_buttons(list: Array, panel: Control, storage_array: Array, texture, _uses := 3) -> void:
@@ -81,6 +83,49 @@ func _create_buttons(list: Array, panel: Control, storage_array: Array, texture,
 		clone.set_meta("basic_button", data)
 		clone.pressed.connect(_on_button_pressed.bind(clone))
 
+func _TransGainedScoreToPoints(Target: float,current:) -> int:
+	if Target == current:
+		return roundi(40)
+	var relative = abs((current/Target)-1)
+	if relative <= 0.25:
+		if relative <= 0.1:
+			return roundi(20)
+		return roundi(10)
+	return 0
+	
+func _battle_end():
+	print("Before: "+str(BossFrame.room)+ "   " + BossFrame.currenemy)
+	ProgressContainer.currentValue = ScoreLogic.TempScoreCalc(DisplayLabel.text)
+	print(ProgressContainer.currentValue)
+	print(ProgressContainer.target)
+	if BossFrame.currenemy == "NB":
+		var points_to_add = _TransGainedScoreToPoints(ProgressContainer.target,ProgressContainer.currentValue)
+		if points_to_add == 0:
+			#DieDieDie
+			LifePanel.numlives -= 1
+			print("life down!")
+		TotalPoints += points_to_add
+		BossFrame.room += 1
+	else:
+		#Same as reg but also decrease health
+		var points_to_add = _TransGainedScoreToPoints(ProgressContainer.target,ProgressContainer.currentValue)
+		if points_to_add == 0:
+			#DieDieDie
+			LifePanel.numlives -= 1
+		TotalPoints += points_to_add
+		BossFrame.BossBar.value -= points_to_add
+		if BossFrame.BossBar.value <= 0:
+			BossFrame._killBoss()
+	if BossFrame.room%3 == 1 and (BossFrame.currenemy != "Denise"):
+		if BossFrame.currenemy != "Tsundere Denise":
+			_round_to_shop()
+	print("After: "+str(BossFrame.room)+ "   " + BossFrame.currenemy)
+
+func _round_init():
+	ProgressContainer.target = ProgressContainer._targetGen()
+	ProgressContainer.currentValue = 0
+	ProgressContainer._ready()
+
 func _round_to_shop():
 	var BasArra = BasicPanel.get_children()
 	BasArra.remove_at(0)
@@ -116,16 +161,22 @@ func _on_button_pressed(button: Button):
 	if inShop == false:
 		# Decrement uses and disable if it hits 0
 		data.uses -= 1
-		if data.uses <= 0:
+		if data.uses == 0 or data.uses==-1:
 			button.disabled = true
 		
 		# Updating button uses
 		button.get_children(true)[0].get_children()[0].text = str(data.uses)
-		count -= 1
 		# Handle button action
 		match value:
+			"Left":
+				if ScoreLogic.Cursor > 0:
+					ScoreLogic.Cursor -= 1
+			"Right":
+				if ScoreLogic.Cursor < len(DisplayLabel.text):
+					ScoreLogic.Cursor += 1
 			_:
 				DisplayLabel.text += value
+				
 	
 	if inShop == true:
 		if data.price <= TotalPoints:
@@ -135,12 +186,23 @@ func _on_button_pressed(button: Button):
 			# Updating button uses
 			button.get_children(true)[0].get_children()[0].text = str(data.uses)
 	
-	if count == 0 and inShop == false:
-		_round_to_shop()
+	#Logic for ending a round, enter submits the score and handles if you go to shop or not
+	#if you don't go shop or leave shop, it will load data
+	if data.value == "Enter":
+		var flag = false
+		if inShop == true:
+			flag = true
+		else:
+			_battle_end()
+		DisplayLabel.text = ""
+		if flag == true:
+			_shop_to_round()
+		if not inShop:
+			_round_init()
 		
-	if data.uses == 3 and inShop == true:
-		_shop_to_round()
-		count = 10
-	
+		
+			
+		
+		
 	
 	

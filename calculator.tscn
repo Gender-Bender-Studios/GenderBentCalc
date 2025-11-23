@@ -2,23 +2,23 @@
 
 [ext_resource type="Script" uid="uid://c0api60s4fwit" path="res://calculator.gd" id="1_kvxsv"]
 [ext_resource type="Script" uid="uid://606uy3qcawrl" path="res://DisplayContainer.gd" id="2_2r0k0"]
+[ext_resource type="Script" uid="uid://c4jdlrt0ycnin" path="res://ScoreLogicKILLMERARR.gd" id="2_r0ob0"]
 [ext_resource type="Script" uid="uid://c3d1g43jum7d3" path="res://life_panel.gd" id="3_cgfmh"]
 [ext_resource type="FontFile" uid="uid://58jmg6xqcypb" path="res://prstartk.ttf" id="3_k7ndo"]
 [ext_resource type="Script" uid="uid://ect8hktyi0nv" path="res://Display2D.gd" id="3_qrjcc"]
 [ext_resource type="Script" uid="uid://dp8x3cw82exvq" path="res://ButtonController.gd" id="3_wfhry"]
-[ext_resource type="Texture2D" uid="uid://dngmop7d3fixa" path="res://Assets/Battery_life.png" id="4_n8v26"]
+[ext_resource type="Texture2D" uid="uid://djba1or6en1vr" path="res://Assets/Battery_life.png" id="4_n8v26"]
 [ext_resource type="Script" uid="uid://c4fgrehdrd31i" path="res://ButtonUses.gd" id="4_quc1l"]
 [ext_resource type="Script" uid="uid://buey07oj73ot2" path="res://score_container.gd" id="5_i2ixg"]
 [ext_resource type="Theme" uid="uid://dhrqi05xwfxmy" path="res://Textures/white buttons.tres" id="5_n86kn"]
 [ext_resource type="Script" uid="uid://wxfksv0x5ams" path="res://progress_container.gd" id="7_8s7sf"]
 [ext_resource type="Script" uid="uid://d4kv6t2hc201d" path="res://progressRenderer.gd" id="8_bht02"]
-[ext_resource type="Texture2D" uid="uid://bl4thh2bhpaad" path="res://Assets/Blank_calc_main.png" id="10_5fm7i"]
+[ext_resource type="Texture2D" uid="uid://cub25lfjm7g12" path="res://Assets/Blank_calc_main.png" id="10_5fm7i"]
 [ext_resource type="Script" uid="uid://dl3whmfcw7i54" path="res://prices.gd" id="11_n8v26"]
 [ext_resource type="Script" uid="uid://d2dsed55ddsgq" path="res://boss_container.gd" id="14_wqfqp"]
-[ext_resource type="Texture2D" uid="uid://dexayin0orj1a" path="res://Assets/Placeholders/IMG_3336.jpg" id="15_2ur1s"]
-[ext_resource type="Texture2D" uid="uid://dyn7wk6o5315r" path="res://Assets/Button_description_page.png" id="16_xbgcs"]
+[ext_resource type="Texture2D" uid="uid://bxh1csn5hmp82" path="res://Assets/Button_description_page.png" id="16_xbgcs"]
 [ext_resource type="Theme" uid="uid://cx8wsmug2nj0s" path="res://Textures/blue buttons.tres" id="17_xbgcs"]
-[ext_resource type="Texture2D" uid="uid://cxr4yn1dwp2x" path="res://Assets/New_button_icon.png" id="18_4lgyd"]
+[ext_resource type="Texture2D" uid="uid://bhbw51l27dhtl" path="res://Assets/New_button_icon.png" id="18_4lgyd"]
 [ext_resource type="Script" uid="uid://pf28ut1simgj" path="res://node_2d.gd" id="19_4lgyd"]
 [ext_resource type="Theme" uid="uid://ce5dcjl6hekcq" path="res://Textures/orange buttons.tres" id="21_r0ob0"]
 
@@ -30,6 +30,9 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_kvxsv")
+
+[node name="ScoreLogic(idk_how_to_reference_scripts)" type="Node2D" parent="."]
+script = ExtResource("2_r0ob0")
 
 [node name="CalcSprite" type="Sprite2D" parent="."]
 z_index = -1
@@ -205,7 +208,6 @@ script = ExtResource("14_wqfqp")
 [node name="BossSprite" type="Sprite2D" parent="BossFrame"]
 position = Vector2(86.00006, 103)
 scale = Vector2(0.05, 0.036)
-texture = ExtResource("15_2ur1s")
 
 [node name="BossHP" type="Node2D" parent="BossFrame"]
 position = Vector2(17, 157)
