@@ -30,7 +30,7 @@ var buttType: String = "" # REG / POW
 @onready var MenuPanel = $MenuPanel
 @onready var PowerPanel = $PowerPanel
 @onready var ControlPanel = $ControlPanel
-@onready var DisplayLabel = $DisplayContainer/Display2D/Display
+@onready var Display: CalcDisplay = $DisplayContainer/Display
 
 # DANGERA
 @onready var lbl = $BasicPanel/ButtonTemplate/Uses/Label
@@ -118,14 +118,14 @@ func _on_button_pressed(button: Button):
 		data.uses -= 1
 		if data.uses <= 0:
 			button.disabled = true
-		
+	
 		# Updating button uses
 		button.get_children(true)[0].get_children()[0].text = str(data.uses)
 		count -= 1
 		# Handle button action
 		match value:
 			_:
-				DisplayLabel.text += value
+				Display.button_press(value)
 	
 	if inShop == true:
 		if data.price <= TotalPoints:

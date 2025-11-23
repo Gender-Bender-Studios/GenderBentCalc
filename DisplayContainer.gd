@@ -1,7 +1,7 @@
 extends Container
 
 @onready var DisplayContainer = $"."
-@onready var Display = $Display2D/Display
+@onready var Display: CalcDisplay = $Display
 
 
 

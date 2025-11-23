@@ -1,11 +1,11 @@
 [gd_scene load_steps=3 format=3 uid="uid://cidf5bgyfhq7l"]
 
 [ext_resource type="Script" uid="uid://blb2ypcou3gal" path="res://help.gd" id="1_37kl0"]
-[ext_resource type="Script" uid="uid://l5jkdxm4x4k5" path="res://text_render.gd" id="3_6uqi0"]
+[ext_resource type="Script" uid="uid://l5jkdxm4x4k5" path="res://display.gd" id="3_6uqi0"]
 
 [node name="Help" type="Node2D"]
 
-[node name="Control" type="Control" parent="."]
+[node name="Display" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
@@ -34,6 +34,6 @@ offset_right = 482.0
 offset_bottom = 450.0
 text = "<-"
 
-[connection signal="pressed" from="Left" to="Control" method="_on_left_btn_pressed"]
-[connection signal="pressed" from="Right" to="Control" method="_on_right_btn_pressed"]
-[connection signal="pressed" from="Backspace" to="Control" method="_on_backspace_btn_pressed"]
+[connection signal="pressed" from="Left" to="Display" method="_on_left_btn_pressed"]
+[connection signal="pressed" from="Right" to="Display" method="_on_right_btn_pressed"]
+[connection signal="pressed" from="Backspace" to="Display" method="_on_backspace_btn_pressed"]
