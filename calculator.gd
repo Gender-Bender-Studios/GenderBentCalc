@@ -1,5 +1,7 @@
 extends Control
 
+
+
 const BasicButtons = ["7","8","9","+","4","5","6","-","1","2","3","*",".","0","()","/"]
 const MenuButtons = ["Start","Quit","Cont","Save"]
 const ControlButtons = ["Left","Right","Enter"]
@@ -11,7 +13,12 @@ var menu_button_data : Array = []
 var control_button_data : Array = []
 var power_button_data : Array = []
 
+@onready var orangebutton = load("res://Textures/orange buttons.tres")
+@onready var bluebutton = load("res://Textures/blue buttons.tres")
+@onready var calcsprite = $Sprite2D
+
 @onready var ButtonTemplate = $BasicPanel/ButtonTemplate
+@onready var LifePanel = $LifePanel
 @onready var BasicPanel = $BasicPanel
 @onready var MenuPanel = $MenuPanel
 @onready var PowerPanel = $PowerPanel
@@ -24,12 +31,12 @@ var power_button_data : Array = []
 
 func _ready() -> void:
 	_create_buttons(BasicButtons, BasicPanel, basic_button_data)
-	_create_buttons(MenuButtons, MenuPanel, menu_button_data)
-	_create_buttons(PowerButtons, PowerPanel, power_button_data)
-	_create_buttons(ControlButtons, ControlPanel, control_button_data)
+	_create_buttons(MenuButtons, MenuPanel, menu_button_data, orangebutton)
+	_create_buttons(PowerButtons, PowerPanel, power_button_data, bluebutton)
+	_create_buttons(ControlButtons, ControlPanel, control_button_data, orangebutton)
 
 
-func _create_buttons(list: Array, panel: Control, storage_array: Array) -> void:
+func _create_buttons(list: Array, panel: Control, storage_array: Array, texture = load("res://Textures/white buttons.tres")) -> void:
 	var _uses: int = 3
 	
 	# Use label set up
@@ -42,12 +49,13 @@ func _create_buttons(list: Array, panel: Control, storage_array: Array) -> void:
 		var data = BasicButton.new(label, label, _uses)  # start with 3 uses
 		storage_array.append(data)
 
-		var clone = ButtonTemplate.duplicate()
+		var clone: Button = ButtonTemplate.duplicate()
 		clone.visible = true
 		panel.add_child(clone)
 
 		clone.name = "button_" + data.name
 		clone.text = data.value
+		clone.theme = texture
 
 		# Set initial enabled/disabled state
 		clone.disabled = data.uses == 0
@@ -60,6 +68,9 @@ func _create_buttons(list: Array, panel: Control, storage_array: Array) -> void:
 func _on_button_pressed(button: Button):
 	var data: BasicButton = button.get_meta("basic_button")
 	var value: String = data.value
+	
+	LifePanel.numlives += 1
+	print(LifePanel.numlives)
 
 	# Decrement uses and disable if it hits 0
 	data.uses -= 1

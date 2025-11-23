@@ -1,11 +1,6 @@
 res://calculator.tscn
+res://Textures/white buttons.tres
+res://Textures/blue buttons.tres
 res://calculator.gd
-res://ButtonController.gd
-res://control.gd
-res://node_2d.gd
-res://display_2d.gd
-res://Display.gd
 res://Display2D.gd
-res://DisplayContainer.gd
-res://progress_container.gd
-res://progressRenderer.gd
+res://life_panel.gd

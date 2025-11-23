@@ -1,5 +1,9 @@
+Sprite2D
+Panel
+Container
+ColorRect
+AnimatedSprite2D
 Label
 Node2D
 TextEdit
-Container
 Control

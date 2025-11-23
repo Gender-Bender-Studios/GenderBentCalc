@@ -3,18 +3,63 @@ extends Node2D
 @onready var progressContainer =  $".."
 @onready var bar = $"."
 
+
+var scalePositions:Array
+
+
 const barHeight:int = 50
 
+func _ready() -> void:
+	
+	scalePositions = progressContainer.relativePositions
+	
+	
+
 func _draw() -> void:
-	var badPosition:Vector2 = Vector2(0,progressContainer.size.y-barHeight*2 -25)
-	var goodPosition:Vector2 = Vector2(3*progressContainer.size.x/8,progressContainer.size.y-barHeight*2 -25)
-	var pityPosition:Vector2 = Vector2(49*progressContainer.size.x/100,progressContainer.size.y-barHeight*2 -25)
+	var bars:Array = []
+	for i in range(len(scalePositions)/2):
+		var positon:Vector2 = Vector2(scalePositions[i],0)
+		var length:Vector2 = Vector2((scalePositions[-i-1]-scalePositions[i]),barHeight)
+		bars.append(Rect2(positon,length))
+		
+
 	
-	var badSize:Vector2 = Vector2(progressContainer.size.x,barHeight)
-	var goodSize:Vector2 = Vector2(progressContainer.size.x/4,barHeight)
-	var pitySize:Vector2 = Vector2(2*progressContainer.size.x/100,barHeight)
+	#print(bars)
 	
-	draw_rect(Rect2(badPosition,badSize),Color.RED)
-	draw_rect(Rect2(goodPosition,goodSize),Color.GREEN)
-	draw_rect(Rect2(pityPosition,pitySize),Color.DARK_GREEN)
+		
+	for rectangle in bars:
+		draw_rect(rectangle,Color(randf(), randf(), randf()))
+		
+	var tgt:float = progressContainer.target
+	var cnt:float = progressContainer.currentValue
+	var rel:Array = progressContainer.mirror(progressContainer.relativeValues)
+	
+	
+	
+	
+	var top:float = cnt - tgt * (sign(tgt) *rel.min()+1)
+	var bottom:float = abs(tgt)* (2 * rel.max())
+	var x:float = 750 * (top/bottom)
+	
+	print("top: ",top,"\nbottom: ",bottom,"\nx: ",x,"\nvalues: ",rel)
+	
+
+	
+	if x > 750:
+		x = 750
+	if x < 0:
+		x = 0
+	if(sign(cnt*tgt) == -1):
+		750+x
+	print(x)
+
+	
+	var pointerLength:Vector2 = Vector2(5,barHeight)
+	var pointerPosition:Vector2 = Vector2(x,0)
+	var pointer = Rect2(pointerPosition,pointerLength)
+	draw_rect(pointer,Color.BLACK)
+	#print(pointerPosition)
+	
+	
+
 	pass
