@@ -5,6 +5,8 @@ const MenuButtons = ["Start","Quit","Cont","Save"]
 const ControlButtons = ["Left","Right","Enter"]
 const PowerButtons = ["Miku","MIKU","Milk","Sun Tzu"]
 
+const fibIDX:Array = [0,1,2,3]
+
 # Storage if you want access to the BasicButton data later
 var basic_button_data : Array = []
 var menu_button_data : Array = []
@@ -16,6 +18,7 @@ var currentValue: float
 
 var area: int = 1
 var round: int = 1
+var Enemy: String = ""
 
 # Button swapping variables
 var buttSwap: bool = false
@@ -48,11 +51,15 @@ var buttType: String = "" # REG / POW
 @onready var Location = $ProgressContainer/Location
 @onready var ButtonTraderB = $ButtonTrader/ButtonTraderButton
 
+
 func _ready() -> void:
 	_create_buttons(BasicButtons, BasicPanel, basic_button_data, whitebutton)
 	_create_buttons(MenuButtons, MenuPanel, menu_button_data, orangebutton, -2)
 	_create_buttons(PowerButtons, PowerPanel, power_button_data, bluebutton)
 	_create_buttons(ControlButtons, ControlPanel, control_button_data, orangebutton, -2)
+	Enemy = progressContainer.currenemy
+	
+	
 
 func _create_buttons(list: Array, panel: Control, storage_array: Array, texture, _uses := 3) -> void:
 	
@@ -103,6 +110,9 @@ func _create_buttons(list: Array, panel: Control, storage_array: Array, texture,
 
 func _round_to_shop():
 
+
+
+
 	var BasArra = BasicPanel.get_children()
 	BasArra.remove_at(0)
 	var PowArra = PowerPanel.get_children()
@@ -139,12 +149,20 @@ func _shop_to_round():
 	ButtonTraderB.visible = false
 
 func _on_button_pressed(button: Button):
+	
+	
 	var data: BasicButton = button.get_meta("basic_button")
 	var value: String = data.value
 
 	if inShop == false:
 		# Decrement uses and disable if it hits 0
-		data.uses -= 1
+		var useCost:int = 1
+		if Enemy in ["Denise","Tsundere Denise"]:
+			useCost = 2
+		else:
+			useCost = 1
+		data.uses -= useCost
+		data.uses = max(data.uses,0)
 		if data.uses <= 0 && !(data.buttonText in MenuButtons || data.buttonText in ControlButtons): 
 			button.disabled = true
 		
@@ -234,6 +252,8 @@ func checkScore(target:float,current:float) -> void:
 		_round_to_shop()
 		Eqn.text = "Scuff Sals\n\nClick Buttons to Spend Points"
 		Ans.text = ""
+	
+	Enemy = progressContainer.currenemy
 
 func eval_safe(equation: String) -> String:
 	var expr := Expression.new()

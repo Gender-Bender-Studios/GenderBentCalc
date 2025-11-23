@@ -20,6 +20,7 @@ var routeEnemies:Array = [
 ]
 
 var target:float
+var currenemy:String = ""
 
 
 
@@ -67,7 +68,7 @@ func mirror(arr:Array) -> Array:
 func _targetGen():
 	var area:int = rootNode.area
 	var round:int = rootNode.round
-	var currenemy = routeEnemies[area-1][round-1]
+	currenemy = routeEnemies[area-1][round-1]
 	
 	print("Area: ",area,"\nRound: ",round,"\nCurrent Enemy: ",currenemy)
 	if currenemy == "Denise":

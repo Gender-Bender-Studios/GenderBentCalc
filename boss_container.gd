@@ -72,7 +72,7 @@ func _spawnGenBoss():
 		BossDesc.text = "Pythagorean theorem: Any square numbers are removed from your equation"
 		BossSprite.texture = load("res://Assets/triangles-4-01.webp")
 	elif currenemy == "Fibonacci":
-		BossDesc.text = "Spiral of life: Every round you lose all of the uses of a button"
+		BossDesc.text = "Spiral of life: At the end of every round, a random button loses all of it's uses"
 		BossSprite.texture = load("res://Assets/Placeholders/Spectrum3.webp")
 	elif currenemy == "Sherlock":
 		BossSprite.texture = load("res://Assets/vintage-female-sherlock-holmes-detective-smoking-a-pipe-and-wearing-CT6BAP.jpg")
