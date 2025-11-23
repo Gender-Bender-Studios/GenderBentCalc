@@ -5,7 +5,8 @@ const MenuButtons = ["Start","Quit","Cont","Save"]
 const ControlButtons = ["Left","Right","Enter"]
 const PowerButtons = ["Miku","MIKU","Milk","Sun Tzu"]
 
-const fibIDX:Array = [0,1,2,3]
+const fibPos:Array = [0,1,2,3]
+var fibIdx:int = 0
 
 # Storage if you want access to the BasicButton data later
 var basic_button_data : Array = []
@@ -16,8 +17,8 @@ var TotalPoints: int = 10
 var inShop: bool = false
 var currentValue: float 
 
-var area: int = 1
-var round: int = 1
+var area: int = 3
+var round: int = 6
 var Enemy: String = ""
 
 # Button swapping variables
@@ -161,6 +162,7 @@ func _on_button_pressed(button: Button):
 			useCost = 2
 		else:
 			useCost = 1
+			
 		data.uses -= useCost
 		data.uses = max(data.uses,0)
 		if data.uses <= 0 && !(data.buttonText in MenuButtons || data.buttonText in ControlButtons): 

@@ -78,7 +78,7 @@ func _spawnGenBoss():
 		BossSprite.texture = load("res://Assets/vintage-female-sherlock-holmes-detective-smoking-a-pipe-and-wearing-CT6BAP.jpg")
 		BossDesc.text = "Pedantry: Acceptable range for answers decreased & upper limit put on key presses / function"
 	elif currenemy == "Einstein":
-		BossSprite.texture = load("res://Assets/Screenshot_2025-11-23_at_15.51.35.png")
+		BossSprite.texture = load("res://Assets/Einstein.png")
 		BossDesc.text = "Theory of relativity: Randomises the position and uses of your regular buttons each round"
 	elif currenemy == "Tsundere Denise":
 		BossDesc.text = "Pressure: Buttons take 2 uses per press, not one /n Presence: She jumps in front of some of your buttons each round to make sure you're paying attention to her"

@@ -16,7 +16,7 @@ var routeEnemies:Array = [
 	["Normal","Normal","Normal","Normal","Normal","Boss"],
 	["Normal","Normal","Denise","Normal","Normal","Boss"],
 	["Normal","Normal","Normal","Normal","Normal","Boss"],
-	["Denise"]
+	["Tsundere Denise"]
 ]
 
 var target:float
