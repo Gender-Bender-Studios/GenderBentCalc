@@ -9,7 +9,7 @@ class Cursor:
 	var canvas: CanvasItem
 	var box: RichTextLabel
 	var index: int = 0
-	var rect: Rect2 = Rect2(0,0,0,0)
+	var rect: Rect2 = Rect2(0, 0, 0, 0)
 	var color: Color
 
 	var frame: int = 0
@@ -26,12 +26,12 @@ class Cursor:
 	func recalculate_rect():
 		var box_width = box.size.x
 		if box.text.is_empty():
-			self.rect = Rect2(Vector2(box.size.x / 2 - 3, box.size.y/2 - 18), Vector2(5, 36)) 
+			self.rect = Rect2(Vector2(box.size.x / 2 - 3, box.size.y / 2 - 18), Vector2(5, 36))
 			print(self.rect)
 			return
 		
 		
-		var line: int = box.get_character_line(maxi(self.index-1, 0))
+		var line: int = box.get_character_line(maxi(self.index - 1, 0))
 		var char_y: float = box.size.y / 2 - 18 + box.get_line_offset(line)
 		
 		var line_height: int = box.get_line_height(line)
@@ -63,8 +63,7 @@ class Cursor:
 		self.frame = (self.frame + 1) % self.cycle[-1]
 
 
-
-@onready var DisplayContainer =  $".."
+@onready var DisplayContainer = $".."
 @onready var Eqn: RichTextLabel = $Equation
 @onready var Ans = $Ans
 
@@ -73,16 +72,20 @@ var current_val: float = NAN
 
 func _ready() -> void:
 	Eqn.size = DisplayContainer.size
-	Eqn.position = Vector2(0,0)
-	Ans.size.x = DisplayContainer.size.x/2
-	Ans.size.y = DisplayContainer.size.y/4
+	Eqn.position = Vector2(0, 0)
+	Ans.size.x = DisplayContainer.size.x / 2
+	Ans.size.y = DisplayContainer.size.y / 4
 	
-	Ans.position = Vector2(DisplayContainer.size.x/2,DisplayContainer.size.y-DisplayContainer.size.y/4)
+	Ans.position = Vector2(DisplayContainer.size.x / 2, DisplayContainer.size.y - DisplayContainer.size.y / 4)
 	Ans.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
 	Ans.text = "="
 	
 	cursor = Cursor.create(self, Eqn)
 	
+func reset() -> void:
+	Ans.text = "="
+	Eqn.text = ""
+	cursor.index = 0
 
 func move(rel: int) -> void:
 	print("MOVING ", rel)
@@ -120,5 +123,3 @@ func _process(delta: float) -> void:
 func _draw() -> void:
 	self.draw_rect(Eqn.get_rect(), Color.TRANSPARENT, true)
 	self.cursor.draw()
-
-	

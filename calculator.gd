@@ -1,20 +1,20 @@
 extends Control
 
-const BasicButtons = ["7","8","9","+","4","5","6","-","1","2","3","*",".","0","()","/"]
-const MenuButtons = ["Start","Quit","Cont","Save"]
-const ControlButtons = ["Left","Right","Enter"]
-const PowerButtons = ["Miku","MIKU","Milk","Sun Tzu"]
+const BasicButtons = ["7", "8", "9", "+", "4", "5", "6", "-", "1", "2", "3", "*", ".", "0", "()", "/"]
+const MenuButtons = ["Start", "Quit", "Cont", "Save"]
+const ControlButtons = ["Left", "Right", "Enter"]
+const PowerButtons = ["Miku", "MIKU", "Milk", "Sun Tzu"]
 
-const fibIDX:Array = [0,1,2,3]
+const fibIDX: Array = [0, 1, 2, 3]
 
 # Storage if you want access to the BasicButton data later
-var basic_button_data : Array = []
-var menu_button_data : Array = []
-var control_button_data : Array = []
-var power_button_data : Array = []
+var basic_button_data: Array = []
+var menu_button_data: Array = []
+var control_button_data: Array = []
+var power_button_data: Array = []
 var TotalPoints: int = 10
 var inShop: bool = false
-var currentValue: float 
+var currentValue: float
 
 var area: int = 1
 var round: int = 1
@@ -23,7 +23,7 @@ var Enemy: String = ""
 # Button swapping variables
 var buttSwap: bool = false
 var buttToSwap: String = "" # The text that will go on the button
-var buttType: String = "" # REG / POW 
+var buttType: String = "" # REG / POW
 
 
 @onready var whitebutton = load("res://Textures/white buttons.tres")
@@ -61,10 +61,7 @@ func _ready() -> void:
 	Enemy = progressContainer.currenemy
 	
 	
-
 func _create_buttons(list: Array, panel: Control, storage_array: Array, texture, _uses := 3) -> void:
-	
-	
 	var _price: int = 1
 	var labelvis = true
 	if _uses == -2:
@@ -82,16 +79,14 @@ func _create_buttons(list: Array, panel: Control, storage_array: Array, texture,
 	lblprices.get_parent().visible = false
 	
 	
-	
 	for label in list:
-
 		var val
-		if (list == ControlButtons || list == MenuButtons) && label not in ["Enter","Quit", "Left", "Right"]:
+		if (list == ControlButtons || list == MenuButtons) && label not in ["Enter", "Quit", "Left", "Right"]:
 			val = "skip"
 			_price = 0
 		else:
 			val = label
-		var data = BasicButton.new(label, val, _uses,_price)
+		var data = BasicButton.new(label, val, _uses, _price)
 		storage_array.append(data)
 
 		var clone = ButtonTemplate.duplicate()
@@ -110,10 +105,6 @@ func _create_buttons(list: Array, panel: Control, storage_array: Array, texture,
 		clone.pressed.connect(_on_button_pressed.bind(clone))
 
 func _round_to_shop():
-
-
-
-
 	var BasArra = BasicPanel.get_children()
 	BasArra.remove_at(0)
 	var PowArra = PowerPanel.get_children()
@@ -128,7 +119,6 @@ func _round_to_shop():
 	ButtonTraderB.visible = true
 		
 
-
 func _shop_to_round():
 	var BasArra = basic_button_data
 	var BasArraFrame = BasicPanel.get_children()
@@ -136,41 +126,37 @@ func _shop_to_round():
 	var PowArraFrame = PowerPanel.get_children()
 	var PowArra = power_button_data
 	inShop = false
-	for i in range(0,len(BasArra)):
+	for i in range(0, len(BasArra)):
 		if BasArra[i].uses == 0:
 			BasArraFrame[i].disabled = true
 		BasArraFrame[i].get_children()[1].visible = false
-	for i in range(0,len(PowArra)):
+	for i in range(0, len(PowArra)):
 		if PowArra[i].uses == 0:
 			PowArraFrame[i].disabled = true
 		PowArraFrame[i].get_children()[1].visible = false
-	Eqn.text = ""
-	Ans.text = "="
+	Display.
 	
 	ButtonTraderB.visible = false
 
 func _on_button_pressed(button: Button):
-	
-	
 	var data: BasicButton = button.get_meta("basic_button")
 	var value: String = data.value
 
 	if inShop == false:
 		# Decrement uses and disable if it hits 0
-		var useCost:int = 1
-		if Enemy in ["Denise","Tsundere Denise"]:
+		var useCost: int = 1
+		if Enemy in ["Denise", "Tsundere Denise"]:
 			useCost = 2
 		else:
 			useCost = 1
 		data.uses -= useCost
-		data.uses = max(data.uses,0)
-		if data.uses <= 0 && !(data.buttonText in MenuButtons || data.buttonText in ControlButtons): 
+		data.uses = max(data.uses, 0)
+		if data.uses <= 0 && !(data.buttonText in MenuButtons || data.buttonText in ControlButtons):
 			button.disabled = true
 		
 
 		# Updating button uses
 		button.get_children(true)[0].get_children()[0].text = str(data.uses)
-		
 		
 		
 		# Handle button action
@@ -179,7 +165,7 @@ func _on_button_pressed(button: Button):
 			"Enter":
 				var current = Display.value()
 				var target: float = float(targetLabel.text)
-				print("Target: ",target,"\nCurrent: ", float(current))
+				print("Target: ", target, "\nCurrent: ", float(current))
 				checkScore(target, float(current))
 			"Quit":
 				get_tree().quit()
@@ -208,29 +194,28 @@ func _on_button_pressed(button: Button):
 			button.get_children(true)[0].get_children()[0].text = str(data.uses)
 	
 
-	
-func checkScore(target:float,current:float) -> void:
-	var relScore = 1 - current/target
+func checkScore(target: float, current: float) -> void:
+	var relScore = 1 - current / target
 	print(relScore)
-	var safe:bool = false
-	var points:float = 0
-	for idx in range(len(progressContainer.relativeValues)-1):
-		var limit:float = progressContainer.relativeValues[idx]
+	var safe: bool = false
+	var points: float = 0
+	for idx in range(len(progressContainer.relativeValues) - 1):
+		var limit: float = progressContainer.relativeValues[idx]
 		#print("\nchecking ",relScore," against ", limit)
 		if abs(relScore) <= limit:
 			safe = abs(relScore) <= limit
 			
 			
-			points = round(50*(1-limit))
-			TotalPoints += points 
-			print("Points Earned: ",points)
+			points = round(50 * (1 - limit))
+			TotalPoints += points
+			print("Points Earned: ", points)
 			round += 1
 			
 			if round == 6:
 				pass
 				#runBoss()			
 			if round == 7:
-				area+=1
+				area += 1
 				round = 1
 			break
 			
@@ -238,15 +223,16 @@ func checkScore(target:float,current:float) -> void:
 	#print(safe)
 	#		
 	if !safe:
-		lives.numlives-=1
+		lives.numlives -= 1
 
 				
-	print("\nCurrent Round: ",area,"-",round)
+	print("\nCurrent Round: ", area, "-", round)
 	progressContainer.resetCalc()
 	Location.text = "Area: " + str(area) + "       Round: " + str(round)
 
 	if round == 4:
 		_round_to_shop()
+		Display.reset()
 		Eqn.text = "Scuff Sals\n\nClick Buttons to Spend Points"
 		Ans.text = ""
 	
@@ -262,7 +248,6 @@ func eval_safe(equation: String) -> String:
 		return "ERROR"
 
 	return str(result)
-
 
 
 func force_floats(eq: String) -> String:
