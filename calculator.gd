@@ -37,6 +37,7 @@ var buttType: String = "" # REG / POW
 @onready var MenuPanel = $MenuPanel
 @onready var PowerPanel = $PowerPanel
 @onready var ControlPanel = $ControlPanel
+@onready var Display = $DisplayContainer/Display2D
 @onready var Eqn = $DisplayContainer/Display2D/Equation
 @onready var Ans = $DisplayContainer/Display2D/Ans
 
@@ -85,7 +86,7 @@ func _create_buttons(list: Array, panel: Control, storage_array: Array, texture,
 	for label in list:
 
 		var val
-		if (list == ControlButtons || list == MenuButtons) && label not in ["Enter","Quit"]:
+		if (list == ControlButtons || list == MenuButtons) && label not in ["Enter","Quit", "Left", "Right"]:
 			val = "skip"
 			_price = 0
 		else:
@@ -169,32 +170,28 @@ func _on_button_pressed(button: Button):
 
 		# Updating button uses
 		button.get_children(true)[0].get_children()[0].text = str(data.uses)
-	
-		var current = eval_safe(Eqn.text)
 		
 		
-			
+		
 		# Handle button action
+		print("Pressed ", value)
 		match value:
 			"Enter":
-				var target:float = float(targetLabel.text)
-
-				
-				print("Target: ",target,"\nCurrent: ",float(current))
-				checkScore(target,float(current))
+				var current = Display.value()
+				var target: float = float(targetLabel.text)
+				print("Target: ",target,"\nCurrent: ", float(current))
+				checkScore(target, float(current))
 			"Quit":
 				get_tree().quit()
-					
 			"skip":
 				pass
+			"Left":
+				Display.move(-1)
+			"Right":
+				Display.move(1)
 			_:
+				Display.insert(value)
 				
-				Eqn.text += value
-				current = eval_safe(Eqn.text)
-				Ans.text = "= " + str(current)
-				
-				
-				bar.queue_redraw()
 		
 	if inShop == true:
 		match value:

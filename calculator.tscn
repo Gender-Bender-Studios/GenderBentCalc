@@ -9,7 +9,7 @@
 [ext_resource type="Script" uid="uid://dp8x3cw82exvq" path="res://ButtonController.gd" id="3_wfhry"]
 [ext_resource type="Texture2D" uid="uid://dngmop7d3fixa" path="res://Assets/Battery_life.png" id="4_n8v26"]
 [ext_resource type="Script" uid="uid://c4fgrehdrd31i" path="res://ButtonUses.gd" id="4_quc1l"]
-[ext_resource type="Script" uid="uid://buey07oj73ot2" path="res://score_container.gd" id="5_i2ixg"]
+[ext_resource type="Script" path="res://score_container.gd" id="5_i2ixg"]
 [ext_resource type="Theme" uid="uid://dhrqi05xwfxmy" path="res://Textures/white buttons.tres" id="5_n86kn"]
 [ext_resource type="Script" uid="uid://wxfksv0x5ams" path="res://progress_container.gd" id="7_8s7sf"]
 [ext_resource type="Script" uid="uid://d4kv6t2hc201d" path="res://progressRenderer.gd" id="8_bht02"]
@@ -20,7 +20,7 @@
 [ext_resource type="Texture2D" uid="uid://dyn7wk6o5315r" path="res://Assets/Button_description_page.png" id="16_xbgcs"]
 [ext_resource type="Theme" uid="uid://cx8wsmug2nj0s" path="res://Textures/blue buttons.tres" id="17_xbgcs"]
 [ext_resource type="Texture2D" uid="uid://cxr4yn1dwp2x" path="res://Assets/New_button_icon.png" id="18_4lgyd"]
-[ext_resource type="Script" uid="uid://pf28ut1simgj" path="res://node_2d.gd" id="19_4lgyd"]
+[ext_resource type="Script" path="res://node_2d.gd" id="19_4lgyd"]
 [ext_resource type="Theme" uid="uid://ce5dcjl6hekcq" path="res://Textures/orange buttons.tres" id="21_r0ob0"]
 
 [node name="Calculator" type="Control"]
