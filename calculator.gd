@@ -1,9 +1,13 @@
 extends Control
 
 const BasicButtons = ["7","8","9","+","4","5","6","-","1","2","3","*",".","0","()","/"]
+const BasicEXEs = ["7","8","9","+","4","5","6","-","1","2","3","*",".","0","()",")/float("]
 const MenuButtons = ["Start","Quit","Cont","Save"]
+const MenuEXEs = ["","","",""]
 const ControlButtons = ["Left","Right","Enter"]
+const ControlEXEs = ["","",""]
 const PowerButtons = ["Miku","MIKU","Milk","Sun Tzu"]
+const PowerEXEs = ["","","",""]
 
 # Storage if you want access to the BasicButton data later
 var basic_button_data : Array = []
@@ -12,6 +16,7 @@ var control_button_data : Array = []
 var power_button_data : Array = []
 var TotalPoints: int = 0
 var inShop: bool = false
+var EXEstring = "float("
 
 # Button swapping variables
 var buttSwap: bool = false
@@ -39,14 +44,14 @@ var buttType: String = "" # REG / POW
 @onready var lblprices = $BasicPanel/ButtonTemplate/Prices/Label
 
 func _ready() -> void:
-	_create_buttons(BasicButtons, BasicPanel, basic_button_data, whitebutton)
-	_create_buttons(MenuButtons, MenuPanel, menu_button_data, orangebutton, -2)
-	_create_buttons(PowerButtons, PowerPanel, power_button_data, bluebutton)
-	_create_buttons(ControlButtons, ControlPanel, control_button_data, orangebutton, -2)
+	_create_buttons(BasicButtons,BasicEXEs, BasicPanel, basic_button_data, whitebutton)
+	_create_buttons(MenuButtons,MenuEXEs, MenuPanel, menu_button_data, orangebutton, -2)
+	_create_buttons(PowerButtons,PowerEXEs, PowerPanel, power_button_data, bluebutton)
+	_create_buttons(ControlButtons,ControlEXEs, ControlPanel, control_button_data, orangebutton, -2)
 	print("Starting Stats: "+str(ProgressContainer.target)+"  "+str(ProgressContainer.currentValue)+"  "+str(BossFrame.room)+"  "+str(BossFrame.area))
 
 
-func _create_buttons(list: Array, panel: Control, storage_array: Array, texture, _uses := 3) -> void:
+func _create_buttons(list: Array,listEXE: Array, panel: Control, storage_array: Array, texture, _uses := 3) -> void:
 	var _price: int = 1
 	var labelvis = true
 	if _uses == -2:
@@ -63,11 +68,10 @@ func _create_buttons(list: Array, panel: Control, storage_array: Array, texture,
 	lblprices.visible = true
 	lblprices.get_parent().visible = false
 	
-	for label in list:
+	for i in range(0,len(list)):
 		
-		var data = BasicButton.new(label, label, _uses,_price)  # start with 3 uses
+		var data = BasicButton.new(list[i], list[i],listEXE[i], _uses,_price)  # start with 3 uses
 		storage_array.append(data)
-
 		var clone = ButtonTemplate.duplicate()
 
 		clone.visible = true
@@ -87,7 +91,7 @@ func _TransGainedScoreToPoints(Target: float,current:) -> int:
 	if Target == current:
 		return roundi(40)
 	var relative = abs((current/Target)-1)
-	if relative <= 0.25:
+	if relative <= 0.3:
 		if relative <= 0.1:
 			return roundi(20)
 		return roundi(10)
@@ -95,7 +99,7 @@ func _TransGainedScoreToPoints(Target: float,current:) -> int:
 	
 func _battle_end():
 	print("Before: "+str(BossFrame.room)+ "   " + BossFrame.currenemy)
-	ProgressContainer.currentValue = ScoreLogic.TempScoreCalc(DisplayLabel.text)
+	ProgressContainer.currentValue = ScoreLogic.TempScoreCalc(EXEstring+")")
 	print(ProgressContainer.currentValue)
 	print(ProgressContainer.target)
 	if BossFrame.currenemy == "NB":
@@ -124,7 +128,6 @@ func _battle_end():
 func _round_init():
 	ProgressContainer.target = ProgressContainer._targetGen()
 	ProgressContainer.currentValue = 0
-	ProgressContainer._ready()
 
 func _round_to_shop():
 	var BasArra = BasicPanel.get_children()
@@ -157,6 +160,7 @@ func _shop_to_round():
 func _on_button_pressed(button: Button):
 	var data: BasicButton = button.get_meta("basic_button")
 	var value: String = data.value
+	var EXE: String = data.exe
 
 	if inShop == false:
 		# Decrement uses and disable if it hits 0
@@ -176,6 +180,8 @@ func _on_button_pressed(button: Button):
 					ScoreLogic.Cursor += 1
 			_:
 				DisplayLabel.text += value
+				EXEstring += EXE
+				print(EXEstring)
 				
 	
 	if inShop == true:
@@ -195,6 +201,7 @@ func _on_button_pressed(button: Button):
 		else:
 			_battle_end()
 		DisplayLabel.text = ""
+		EXEstring = "float("
 		if flag == true:
 			_shop_to_round()
 		if not inShop:
