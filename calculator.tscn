@@ -106,7 +106,22 @@ script = ExtResource("2_2r0k0")
 [node name="Display2D" type="Node2D" parent="DisplayContainer"]
 script = ExtResource("3_qrjcc")
 
-[node name="Display" type="RichTextLabel" parent="DisplayContainer/Display2D"]
+[node name="Equation" type="RichTextLabel" parent="DisplayContainer/Display2D"]
+offset_left = 25.0
+offset_top = 25.0
+offset_right = 26.0
+offset_bottom = 25.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_colors/default_color = Color(0.09411765, 0.75686276, 0.105882354, 1)
+theme_override_fonts/normal_font = ExtResource("3_k7ndo")
+theme_override_fonts/mono_font = ExtResource("3_k7ndo")
+theme_override_font_sizes/normal_font_size = 32
+theme_override_font_sizes/mono_font_size = 32
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Ans" type="RichTextLabel" parent="DisplayContainer/Display2D"]
 offset_left = 25.0
 offset_top = 25.0
 offset_right = 26.0

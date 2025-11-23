@@ -2,6 +2,8 @@ extends Node2D
 
 @onready var progressContainer =  $".."
 @onready var bar = $"."
+@onready var lbl = $"../../DisplayContainer/Display2D/Equation"
+@onready var rootNode = $"../.."
 
 
 var scalePositions:Array
@@ -27,11 +29,19 @@ func _draw() -> void:
 	#print(bars)
 	
 		
-	for rectangle in bars:
-		draw_rect(rectangle,Color(randf(), randf(), randf()))
+	for i in range(len(bars)):
+		
+		var red:float = 255 - 255/(len(bars)-1) * (i)
+		var green:float = 255/(len(bars)-1) * (i)
+		
+		#print("red: ",red,"\ngreen: ",green)
+		var rectangle:Rect2 = bars[i]
+		var c:Color = Color(red/255,green/255,0)
+		draw_rect(rectangle,c)
 		
 	var tgt:float = progressContainer.target
-	var cnt:float = progressContainer.currentValue
+	var cnt:float = float(rootNode.eval_safe(lbl.text))
+	#print(cnt)
 	var rel:Array = progressContainer.mirror(progressContainer.relativeValues)
 	
 	
@@ -41,7 +51,7 @@ func _draw() -> void:
 	var bottom:float = abs(tgt)* (2 * rel.max())
 	var x:float = 750 * (top/bottom)
 	
-	print("top: ",top,"\nbottom: ",bottom,"\nx: ",x,"\nvalues: ",rel)
+	#print("top: ",top,"\nbottom: ",bottom,"\nx: ",x,"\nvalues: ",rel)
 	
 
 	
@@ -51,7 +61,7 @@ func _draw() -> void:
 		x = 0
 	if(sign(cnt*tgt) == -1):
 		750+x
-	print(x)
+	#print(x)
 
 	
 	var pointerLength:Vector2 = Vector2(5,barHeight)

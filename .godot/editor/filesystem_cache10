@@ -1,21 +1,25 @@
 63f7b34db8d8cdea90c76aacccf841ec
-::res://::1763873501
+::res://::1763895565
 BasicButton.gd::GDScript::5264398256260141255::1763813139::0::1::::<>Node<><>0<>0<><>::
+boss_container.gd::GDScript::9061654216895166380::1763891210::0::1::::<>ColorRect<><>0<>0<><>::
 ButtonController.gd::GDScript::8281665805164759334::1763870504::0::1::::BasicButton<>Button<><>0<>0<><>::
 ButtonPrice.gd::GDScript::4068274315737815049::1763870368::0::1::::<>Node2D<><>0<>0<><>::
 ButtonUses.gd::GDScript::6819034603178628788::1763873501::0::1::::<>Node2D<><>0<>0<><>::
-calculator.gd::GDScript::6528489167280526323::1763872103::0::1::::<>Control<><>0<>0<><>::
-calculator.tscn::PackedScene::7231906844371206685::1763873440::0::1::::<><><>0<>0<><>::uid://c0api60s4fwit::::res://calculator.gd<>uid://606uy3qcawrl::::res://DisplayContainer.gd<>uid://c3d1g43jum7d3::::res://life_panel.gd<>uid://58jmg6xqcypb::::res://prstartk.ttf<>uid://ect8hktyi0nv::::res://Display2D.gd<>uid://dp8x3cw82exvq::::res://ButtonController.gd<>uid://dngmop7d3fixa::::res://Assets/Battery_life.png<>uid://c4fgrehdrd31i::::res://ButtonUses.gd<>uid://dhrqi05xwfxmy::::res://Textures/white buttons.tres<>uid://wxfksv0x5ams::::res://progress_container.gd<>uid://d4kv6t2hc201d::::res://progressRenderer.gd<>uid://bl4thh2bhpaad::::res://Assets/Blank_calc_main.png<>uid://dl3whmfcw7i54::::res://prices.gd
+button_swap_panel.gd::GDScript::6245547692068560624::1763886148::0::1::::<>Panel<><>0<>0<><>::
+calculator.gd::GDScript::6528489167280526323::1763895332::0::1::::<>Control<><>0<>0<><>::
+calculator.tscn::PackedScene::7231906844371206685::1763895332::0::1::::<><><>0<>0<><>::uid://c0api60s4fwit::::res://calculator.gd<>uid://606uy3qcawrl::::res://DisplayContainer.gd<>uid://c3d1g43jum7d3::::res://life_panel.gd<>uid://58jmg6xqcypb::::res://prstartk.ttf<>uid://ect8hktyi0nv::::res://Display2D.gd<>uid://dp8x3cw82exvq::::res://ButtonController.gd<>uid://dngmop7d3fixa::::res://Assets/Battery_life.png<>uid://c4fgrehdrd31i::::res://ButtonUses.gd<>uid://buey07oj73ot2::::res://score_container.gd<>uid://dhrqi05xwfxmy::::res://Textures/white buttons.tres<>uid://wxfksv0x5ams::::res://progress_container.gd<>uid://d4kv6t2hc201d::::res://progressRenderer.gd<>uid://bl4thh2bhpaad::::res://Assets/Blank_calc_main.png<>uid://dl3whmfcw7i54::::res://prices.gd<>uid://d2dsed55ddsgq::::res://boss_container.gd<>uid://dexayin0orj1a::::res://Assets/Placeholders/IMG_3336.jpg<>uid://dyn7wk6o5315r::::res://Assets/Button_description_page.png<>uid://cx8wsmug2nj0s::::res://Textures/blue buttons.tres<>uid://cxr4yn1dwp2x::::res://Assets/New_button_icon.png<>uid://pf28ut1simgj::::res://node_2d.gd<>uid://ce5dcjl6hekcq::::res://Textures/orange buttons.tres
 Display2D.gd::GDScript::286097068128857555::1763866220::0::1::::<>Node2D<><>0<>0<><>::
-DisplayContainer.gd::GDScript::2229382843828949189::1763823130::0::1::::<>Container<><>0<>0<><>::
+DisplayContainer.gd::GDScript::2229382843828949189::1763895525::0::1::::<>Container<><>0<>0<><>::
 icon.svg::CompressedTexture2D::3933441479278969812::1763811973::1763812173::1::::<><><>0<>0<>30662f98f0c33ea9c8793786170cd2a8<>res://.godot/imported/icon.svg-218a8f2b3041327d8a5756f3a245f83b.ctex::
-progressRenderer.gd::GDScript::9216713750557171187::1763854300::0::1::::<>Node2D<><>0<>0<><>::
-progress_container.gd::GDScript::1591957670311964778::1763871483::0::1::::<>Container<><>0<>0<><>::
+life_panel.gd::GDScript::6745913045956477762::1763879066::0::1::::<>Panel<><>0<>0<><>::
+node_2d.gd::GDScript::1064853914368331109::1763881646::0::1::::<>Node2D<><>0<>0<><>::
+prices.gd::GDScript::7990490820735291673::1763889179::0::1::::<>Node2D<><>0<>0<><>::
+progressRenderer.gd::GDScript::9216713750557171187::1763895528::0::1::::<>Node2D<><>0<>0<><>::
+progress_container.gd::GDScript::1591957670311964778::1763894249::0::1::::<>Container<><>0<>0<><>::
 prstartk.ttf::FontFile::2174358021582241807::1763820631::1763820631::1::::<><><>0<>0<>c03984eabedacbac82673bdfc9654b00<>res://.godot/imported/prstartk.ttf-c76b24c746dc565326b2cc637901d0c3.fontdata::
-life_panel.gd::GDScript::6745913045956477762::1763869823::0::1::::<>Panel<><>0<>0<><>::
-prices.gd::GDScript::7990490820735291673::1763873103::0::1::::<>Node2D<><>0<>0<><>::
 ScoreIncrementRoundEnd.gd::GDScript::-1::1763870368::0::1::::<>Node<><>0<>0<><>::
 ScoreLogicKILLMERARR.gd::GDScript::-1::1763870368::0::1::::<>Node<><>0<>0<><>::
+score_container.gd::GDScript::3799958622971270745::1763883203::0::1::::<>Control<><>0<>0<><>::
 ::res://Assets/::1763873761
 Basic_button_base_unpressed.png::CompressedTexture2D::3114643497354118895::1763861406::1763861406::1::::<><><>0<>0<>32aa749251a9efb656fefa7cfe84c9da<>res://.godot/imported/Basic_button_base_unpressed.png-54da0d51b56ae1fea65d0bcc11fcc0d3.ctex::
 Basic_button_locked.png::CompressedTexture2D::1516213621976444144::1763861406::1763861406::1::::<><><>0<>0<>d95cb081247ccd946c1d02502d6a622b<>res://.godot/imported/Basic_button_locked.png-badfc86904ebcbda8e2bfc0828a93db7.ctex::
@@ -31,9 +35,10 @@ Power_button_unpressed.png::CompressedTexture2D::7856643251963341245::1763861406
 Special_button_locked.png::CompressedTexture2D::4112273057484431782::1763861406::1763861406::1::::<><><>0<>0<>7e085c15da90b2e1054f347b8e60b163<>res://.godot/imported/Special_button_locked.png-a8d6f9909f578b8450bbec212fa710f7.ctex::
 Special_button_pressed.png::CompressedTexture2D::868388231823539866::1763861406::1763861406::1::::<><><>0<>0<>2feaa08c24644e444f7bd8e1a76744c8<>res://.godot/imported/Special_button_pressed.png-1b8888c5bfe6ec2528ebdcd68cb36982.ctex::
 Special_button_unpressed.png::CompressedTexture2D::7926654851851638754::1763861406::1763861406::1::::<><><>0<>0<>996a8cce142035b5351b5ca5f5395ed1<>res://.godot/imported/Special_button_unpressed.png-5420d7f457e7ddeb3151229b969f38b1.ctex::
-::res://Assets/Placeholders/::1763873782
+::res://Assets/Placeholders/::1763873785
 IMG_3336.jpg::CompressedTexture2D::7487541414453057376::1763873782::1763873785::1::::<><><>0<>0<>06ad0c7137db5ed43b29e2616d275985<>res://.godot/imported/IMG_3336.jpg-05a9db61a54de350d018562fac391733.ctex::
-::res://Textures/::1763864673
-orange buttons.tres::Theme::5115714288247255340::1763863816::0::1::::<><><>0<>0<><>::uid://db1bdvtwmm7xn::::res://Assets/Power_button_locked.png<>uid://dj621ccebhigj::::res://Assets/Power_button_unpressed.png<>uid://bn2r6yo6lsd4l::::res://Assets/Power_button_pressed.png
+::res://Textures/::1763886373
 blue buttons.tres::Theme::6456677816561575776::1763864187::0::1::::<><><>0<>0<><>::uid://byuasieqkslva::::res://Assets/Special_button_locked.png<>uid://dk6y32qyq7k63::::res://Assets/Special_button_unpressed.png<>uid://mmwhy085gy3s::::res://Assets/Special_button_pressed.png
+buttonSwapButtons.tres::Theme::3020133085207909581::1763879920::0::1::::<><><>0<>0<><>::uid://dyn7wk6o5315r::::res://Assets/Button_description_page.png
+orange buttons.tres::Theme::5115714288247255340::1763886373::0::1::::<><><>0<>0<><>::uid://db1bdvtwmm7xn::::res://Assets/Power_button_locked.png<>uid://dj621ccebhigj::::res://Assets/Power_button_unpressed.png<>uid://bn2r6yo6lsd4l::::res://Assets/Power_button_pressed.png
 white buttons.tres::Theme::7686665497102572404::1763864187::0::1::::<><><>0<>0<><>::uid://bkm0yugnynvl4::::res://Assets/Basic_button_base_unpressed.png<>uid://vup21i1rbtj1::::res://Assets/Basic_button_locked.png<>uid://bu4e768us4w5w::::res://Assets/Basic_button_pressed.png

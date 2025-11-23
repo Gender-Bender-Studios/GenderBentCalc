@@ -39,7 +39,6 @@ func _spawnAreaBoss():
 	_spawnGenBoss()
 
 func _spawnDenise():
-	print("A")
 	if area == 5:
 		currenemy = "Tsundere Denise"
 	else:

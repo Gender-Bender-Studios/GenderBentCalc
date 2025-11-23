@@ -11,13 +11,17 @@ var menu_button_data : Array = []
 var control_button_data : Array = []
 var power_button_data : Array = []
 var TotalPoints: int = 10
-var count: int = 10
 var inShop: bool = false
+var currentValue: float 
+
+var area: int = 1
+var round: int = 1
 
 # Button swapping variables
 var buttSwap: bool = false
 var buttToSwap: String = "" # The text that will go on the button
 var buttType: String = "" # REG / POW 
+
 
 @onready var whitebutton = load("res://Textures/white buttons.tres")
 @onready var orangebutton = load("res://Textures/orange buttons.tres")
@@ -30,12 +34,17 @@ var buttType: String = "" # REG / POW
 @onready var MenuPanel = $MenuPanel
 @onready var PowerPanel = $PowerPanel
 @onready var ControlPanel = $ControlPanel
-@onready var DisplayLabel = $DisplayContainer/Display2D/Display
+@onready var Eqn = $DisplayContainer/Display2D/Equation
+@onready var Ans = $DisplayContainer/Display2D/Ans
 
 # DANGERA
 @onready var lbl = $BasicPanel/ButtonTemplate/Uses/Label
 @onready var USES = $BasicPanel/ButtonTemplate/Uses
 @onready var lblprices = $BasicPanel/ButtonTemplate/Prices/Label
+@onready var progressContainer = $ProgressContainer
+@onready var targetLabel = $ProgressContainer/targetLabel
+@onready var bar = $ProgressContainer/progressBar
+@onready var lives = $LifePanel
 
 func _ready() -> void:
 	_create_buttons(BasicButtons, BasicPanel, basic_button_data, whitebutton)
@@ -43,8 +52,9 @@ func _ready() -> void:
 	_create_buttons(PowerButtons, PowerPanel, power_button_data, bluebutton)
 	_create_buttons(ControlButtons, ControlPanel, control_button_data, orangebutton, -2)
 
-
 func _create_buttons(list: Array, panel: Control, storage_array: Array, texture, _uses := 3) -> void:
+	
+	
 	var _price: int = 1
 	var labelvis = true
 	if _uses == -2:
@@ -61,9 +71,17 @@ func _create_buttons(list: Array, panel: Control, storage_array: Array, texture,
 	lblprices.visible = true
 	lblprices.get_parent().visible = false
 	
+	
+	
 	for label in list:
-		
-		var data = BasicButton.new(label, label, _uses,_price)  # start with 3 uses
+
+		var val
+		if (list == ControlButtons || list == MenuButtons) && label not in ["Enter","Quit"]:
+			val = "skip"
+			_price = 0
+		else:
+			val = label
+		var data = BasicButton.new(label, val, _uses,_price)
 		storage_array.append(data)
 
 		var clone = ButtonTemplate.duplicate()
@@ -71,8 +89,8 @@ func _create_buttons(list: Array, panel: Control, storage_array: Array, texture,
 		clone.visible = true
 		panel.add_child(clone)
 
-		clone.name = "button_" + data.name
-		clone.text = data.value
+		clone.name = "button_" + data.buttonText
+		clone.text = data.buttonText
 		clone.theme = texture
 
 		# Set initial enabled/disabled state
@@ -116,18 +134,45 @@ func _on_button_pressed(button: Button):
 	if inShop == false:
 		# Decrement uses and disable if it hits 0
 		data.uses -= 1
-		if data.uses <= 0:
+		if data.uses <= 0 && !(data.buttonText in MenuButtons || data.buttonText in ControlButtons): 
 			button.disabled = true
 		
+
 		# Updating button uses
 		button.get_children(true)[0].get_children()[0].text = str(data.uses)
-		count -= 1
+	
+		var current = eval_safe(Eqn.text)
+		
+		
+			
 		# Handle button action
 		match value:
+			"Enter":
+				var target:float = float(targetLabel.text)
+
+				
+				print("Target: ",target,"\nCurrent: ",float(current))
+				checkScore(target,float(current))
+			"Quit":
+				get_tree().quit()
+					
+			"skip":
+				pass
 			_:
-				DisplayLabel.text += value
-	
+				
+				Eqn.text += value
+				current = eval_safe(Eqn.text)
+				Ans.text = "= " + str(current)
+				
+				
+				bar.queue_redraw()
+		
 	if inShop == true:
+		match value:
+			"Quit":
+				_shop_to_round()
+			_:
+				pass
 		if data.price <= TotalPoints:
 			TotalPoints -= data.price
 			if data.uses >= -1:
@@ -135,12 +180,52 @@ func _on_button_pressed(button: Button):
 			# Updating button uses
 			button.get_children(true)[0].get_children()[0].text = str(data.uses)
 	
-	if count == 0 and inShop == false:
-		_round_to_shop()
+
+	
+func checkScore(target:float,current:float) -> void:
+	var relScore = 1 - current/target
+	print(relScore)
+	var safe:bool = false
+	var points:float = 0
+	for idx in range(len(progressContainer.relativeValues)-1):
+		var limit:float = progressContainer.relativeValues[idx]
+		#print("\nchecking ",relScore," against ", limit)
+		if abs(relScore) <= limit:
+			safe = abs(relScore) <= limit
+			
+			
+			points = round(50*(1-limit))
+			TotalPoints += points 
+			print("Points Earned: ",points)
+			round += 1
+			if round == 6:
+				area+=1
+				round = 1
+			break
+			
+	#print(safe)
+	#		
+	if !safe:
+		lives.numlives-=1
 		
-	if data.uses == 3 and inShop == true:
-		_shop_to_round()
-		count = 10
-	
-	
-	
+	print("\nCurrent Round: ",area,"-",round)
+	progressContainer.resetCalc()
+	_round_to_shop()
+
+func eval_safe(equation: String) -> String:
+	var expr := Expression.new()
+	if expr.parse("float(" + equation.replace("*", ")*float(").replace("/", ")/float(") + ")") != OK:
+		return "ERROR"
+
+	var result = expr.execute()
+	if expr.has_execute_failed():
+		return "ERROR"
+
+	return str(result)
+
+
+
+func force_floats(eq: String) -> String:
+	var r = RegEx.new()
+	r.compile(r"(?<!\d)\d+(?!\.\d)")
+	return r.sub(eq, "$0.0", true)
