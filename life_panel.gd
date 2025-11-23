@@ -2,6 +2,8 @@ extends Panel
 
 @onready var LifePanel = $"."
 @onready var LifeTemplate = $LifeTemplate
+@onready var Eqn = $"../DisplayContainer/Display2D/Equation"
+@onready var Ans = $"../DisplayContainer/Display2D/Ans"
 
 var spacing: int = 40
 
@@ -48,4 +50,10 @@ func _spawnlives(startlives,lives) -> void:
 		clone.position = Vector2(18 + n*spacing,25)
 
 func _die():
+	Eqn.text = "Died :("
+	Ans.text = ""
+	await get_tree().create_timer(5).timeout
+	
+	get_tree().quit()
 	pass
+	

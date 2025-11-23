@@ -1,11 +1,11 @@
-Label
 Sprite2D
+Label
+Container
 Button
 Control
 Node2D
 ColorRect
 Panel
-Container
 ProgressBar
 TextureProgressBar
 AnimatedSprite2D

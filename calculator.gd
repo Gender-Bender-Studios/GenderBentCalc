@@ -45,6 +45,8 @@ var buttType: String = "" # REG / POW
 @onready var targetLabel = $ProgressContainer/targetLabel
 @onready var bar = $ProgressContainer/progressBar
 @onready var lives = $LifePanel
+@onready var Location = $ProgressContainer/Location
+@onready var ButtonTraderB = $ButtonTrader/ButtonTraderButton
 
 func _ready() -> void:
 	_create_buttons(BasicButtons, BasicPanel, basic_button_data, whitebutton)
@@ -100,6 +102,7 @@ func _create_buttons(list: Array, panel: Control, storage_array: Array, texture,
 		clone.pressed.connect(_on_button_pressed.bind(clone))
 
 func _round_to_shop():
+
 	var BasArra = BasicPanel.get_children()
 	BasArra.remove_at(0)
 	var PowArra = PowerPanel.get_children()
@@ -110,6 +113,10 @@ func _round_to_shop():
 	for button in PowArra:
 		button.disabled = false
 		button.get_children()[1].visible = true
+		
+	ButtonTraderB.visible = true
+		
+
 
 func _shop_to_round():
 	var BasArra = basic_button_data
@@ -126,6 +133,10 @@ func _shop_to_round():
 		if PowArra[i].uses == 0:
 			PowArraFrame[i].disabled = true
 		PowArraFrame[i].get_children()[1].visible = false
+	Eqn.text = ""
+	Ans.text = "="
+	
+	ButtonTraderB.visible = false
 
 func _on_button_pressed(button: Button):
 	var data: BasicButton = button.get_meta("basic_button")
@@ -171,6 +182,7 @@ func _on_button_pressed(button: Button):
 		match value:
 			"Quit":
 				_shop_to_round()
+
 			_:
 				pass
 		if data.price <= TotalPoints:
@@ -198,19 +210,30 @@ func checkScore(target:float,current:float) -> void:
 			TotalPoints += points 
 			print("Points Earned: ",points)
 			round += 1
+			
 			if round == 6:
+				pass
+				#runBoss()			
+			if round == 7:
 				area+=1
 				round = 1
 			break
 			
+
 	#print(safe)
 	#		
 	if !safe:
 		lives.numlives-=1
-		
+
+				
 	print("\nCurrent Round: ",area,"-",round)
 	progressContainer.resetCalc()
-	_round_to_shop()
+	Location.text = "Area: " + str(area) + "       Round: " + str(round)
+
+	if round == 4:
+		_round_to_shop()
+		Eqn.text = "Scuff Sals\n\nClick Buttons to Spend Points"
+		Ans.text = ""
 
 func eval_safe(equation: String) -> String:
 	var expr := Expression.new()

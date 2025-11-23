@@ -8,6 +8,7 @@ extends Container
 @onready var Eqn = $"../DisplayContainer/Display2D/Equation"
 @onready var Ans = $"../DisplayContainer/Display2D/Ans"
 @onready var BossContainer = $"../BossFrame"
+@onready var Location = $Location
 
 #var currentValue: float = randi_range(-100,100)
 var routeEnemies:Array = [
@@ -31,6 +32,11 @@ const barHeight:int = 50
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	Location.size = Vector2(800,100)
+	Location.position = Vector2(progressContainer.size.x/2-Location.size.x/2,progressContainer.size.y-50)
+	Location.text = "Area: " + str(rootNode.area) + "       Round: " + str(rootNode.round)
+	Location.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	
 	target  = _targetGen()
 	#Eqn.text = str(currentValue)
 	targetBar.position = Vector2(0,barHeight)
@@ -120,7 +126,7 @@ func createLabels(target):
 func resetCalc(hardReset:bool = false) -> void:
 	var threshLables:Array = progressContainer.get_children()
 	for node in threshLables:
-		if node is Label && node.name != "targetLabel":
+		if node is Label && !(node.name in ["targetLabel","Location"]):
 			progressContainer.remove_child(node)
 	if hardReset:
 		pass

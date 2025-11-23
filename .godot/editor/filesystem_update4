@@ -7,3 +7,5 @@ res://progressRenderer.gd
 res://progress_container.gd
 res://ButtonController.gd
 res://DisplayContainer.gd
+res://life_panel.gd
+res://boss_container.gd

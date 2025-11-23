@@ -5,6 +5,7 @@ extends ColorRect
 @onready var BossBar = $BossHP/BossHPBar
 @onready var BossSprite = $BossSprite
 @onready var BossDesc = $BossDescription/DescLabel
+@onready var Calc = $".."
 
 var areabosses: Array = ["Pythagoras", "Fibonacci", "Sherlock", "Einstein"]
 
@@ -12,7 +13,17 @@ var area: int = 1
 var room: int = 1
 var currenemy: String = "NB"
 
+func _ready() -> void:
+	room = Calc.round 
+	area = Calc.area
+
 func _process(delta: float) -> void:
+	room = Calc.round 
+	area = Calc.area
+	
+	if room == 2:
+		_killBoss()
+	
 	if currenemy == "NB":
 		if room == 6:
 			_spawnAreaBoss()
@@ -50,21 +61,28 @@ func _spawnDenise():
 	_spawnGenBoss()
 
 func _spawnGenBoss():
+	
 	BossName.text = currenemy
 	BossContainer.visible = true
 	
 	if currenemy == "Denise":
 		BossDesc.text = "Pressure: Buttons take 2 uses per press, not one"
+		BossSprite.texture = load("res://Assets/Denice_beloved.png")
 	elif currenemy == "Pythagoras":
 		BossDesc.text = "Pythagorean theorem: Any square numbers are removed from your equation"
+		BossSprite.texture = load("res://Assets/triangles-4-01.webp")
 	elif currenemy == "Fibonacci":
 		BossDesc.text = "Spiral of life: Every round you lose all of the uses of a button"
+		BossSprite.texture = load("res://Assets/Placeholders/Spectrum3.webp")
 	elif currenemy == "Sherlock":
+		BossSprite.texture = load("res://Assets/vintage-female-sherlock-holmes-detective-smoking-a-pipe-and-wearing-CT6BAP.jpg")
 		BossDesc.text = "Pedantry: Acceptable range for answers decreased & upper limit put on key presses / function"
 	elif currenemy == "Einstein":
+		BossSprite.texture = load("res://Assets/Screenshot_2025-11-23_at_15.51.35.png")
 		BossDesc.text = "Theory of relativity: Randomises the position and uses of your regular buttons each round"
 	elif currenemy == "Tsundere Denise":
 		BossDesc.text = "Pressure: Buttons take 2 uses per press, not one /n Presence: She jumps in front of some of your buttons each round to make sure you're paying attention to her"
+		BossSprite.texture = load("res://Assets/Denice_beloved.png")
 
 func _killBoss():
 	BossBar.value = 0
@@ -75,7 +93,7 @@ func _killBoss():
 	room = 1
 	
 	currenemy = "NB"
-	BossDesc.Text = ""
+	BossDesc.text = ""
 
 func _victoryscreen():
 	pass
