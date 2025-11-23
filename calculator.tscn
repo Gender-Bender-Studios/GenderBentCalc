@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://dbbgpjgxh7438"]
+[gd_scene load_steps=14 format=3 uid="uid://dbbgpjgxh7438"]
 
 [ext_resource type="Script" uid="uid://c0api60s4fwit" path="res://calculator.gd" id="1_kvxsv"]
 [ext_resource type="Script" uid="uid://606uy3qcawrl" path="res://DisplayContainer.gd" id="2_2r0k0"]
@@ -12,6 +12,7 @@
 [ext_resource type="Script" uid="uid://wxfksv0x5ams" path="res://progress_container.gd" id="7_8s7sf"]
 [ext_resource type="Script" uid="uid://d4kv6t2hc201d" path="res://progressRenderer.gd" id="8_bht02"]
 [ext_resource type="Texture2D" uid="uid://bl4thh2bhpaad" path="res://Assets/Blank_calc_main.png" id="10_5fm7i"]
+[ext_resource type="Script" uid="uid://dl3whmfcw7i54" path="res://prices.gd" id="11_n8v26"]
 
 [node name="Calculator" type="Control"]
 layout_mode = 3
@@ -104,6 +105,13 @@ theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 text = "Teto"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="Prices" type="Node2D" parent="BasicPanel/ButtonTemplate"]
+script = ExtResource("11_n8v26")
+
+[node name="Label" type="Label" parent="BasicPanel/ButtonTemplate/Prices"]
+offset_right = 40.0
+offset_bottom = 23.0
 
 [node name="MenuPanel" type="GridContainer" parent="."]
 layout_mode = 0

@@ -2,6 +2,7 @@ extends Container
 
 @onready var progressContainer = $"."
 @onready var targetLabel = $targetLabel
+@onready var PointsLabel = $PointsLabel
 @onready var targetBar = $progressBar
 @onready var display = $"../DisplayContainer/Display2D/Display"
 
@@ -21,9 +22,6 @@ const barHeight:int = 50
 func _ready() -> void:
 	
 	display.text = str(currentValue)
-	
-	
-	
 	
 	targetLabel.size = Vector2(100,50)
 	targetLabel.position = Vector2(progressContainer.size.x/2-targetLabel.size.x/2,targetLabel.size.y) 

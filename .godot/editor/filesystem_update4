@@ -4,3 +4,7 @@ res://Textures/blue buttons.tres
 res://calculator.gd
 res://Display2D.gd
 res://life_panel.gd
+res://ButtonController.gd
+res://ButtonUses.gd
+res://progress_container.gd
+res://prices.gd

@@ -10,8 +10,8 @@ func _draw() -> void:
 	var ind: Vector2 = Vector2(-3, 3)
 	
 
-	draw_circle(Vector2(size, 0) + ind, radius, Color.DIM_GRAY)
-	draw_circle(Vector2(size, 0) + ind, 0.9*radius, Color.WHITE)
+	draw_circle(ind, radius, Color.DIM_GRAY)
+	draw_circle(ind, 0.9*radius, Color.WHITE)
 	
-	lbl.position = Vector2(size-txtsz*radius,-txtsz*radius) + ind
+	lbl.position = Vector2(txtsz*radius,-txtsz*radius) - ind
 	lbl.size = Vector2(2*txtsz*radius, 2*txtsz*radius)
